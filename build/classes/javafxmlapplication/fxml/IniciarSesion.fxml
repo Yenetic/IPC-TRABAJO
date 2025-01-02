@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.fxml.IniciarSesionController">
+   <children>
+      <GridPane alignment="CENTER" prefHeight="126.0" prefWidth="600.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="10.0" prefWidth="105.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="346.0" minWidth="10.0" prefWidth="168.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="275.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="10.0" prefWidth="67.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="tf_username" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="tf_password" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#boton_recuperar_contrasenya" text="Recuperar contrasenya" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label text="Nombre del usuario:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Contrasenya:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="541.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#boton_volver_atras" text="Volver atras" />
+            <Button mnemonicParsing="false" onAction="#boton_iniciar_sesion" text="Iniciar sesion" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
