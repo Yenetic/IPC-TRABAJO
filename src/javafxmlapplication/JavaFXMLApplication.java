@@ -19,7 +19,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import javafxmlapplication.fxml.MainMenuController;
 import javafxmlapplication.fxml.IniciarSesionController;
 import javafxmlapplication.fxml.JuegoController;
@@ -43,7 +42,7 @@ public class JavaFXMLApplication extends Application {
         
         player_manager = Connect4.getInstance();
         
-        this.stage=stage;
+        this.stage = stage;
         MenuBar menuBar = new MenuBar();
         Menu theme_menu = new Menu("Tema");
         MenuItem light_theme = new MenuItem("Blanco");
@@ -60,27 +59,24 @@ public class JavaFXMLApplication extends Application {
         root = new BorderPane();
         root.setTop(menuBar);
         
-        
         menu_principal();
         
-        
-        
-        stage.setTitle("Cuatro en Raya");
+        stage.setTitle("Cuatro en Raya by Maxim Mashkov & Jia Xiang Liu");
         stage.show();
         stage.setOnCloseRequest(event -> {
             event.consume();
             if (!jugando) stage.close();
-            else{
-            
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Confirmacion");
-            alert.setHeaderText("Seguro que quiere salir?");
-            alert.setContentText("Se perdera todo el progreso.");
-            alert.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.OK) {
-                    stage.close();
-                }
-            });}
+            else {
+                Alert alert = new Alert(AlertType.CONFIRMATION);
+                alert.setTitle("Alerta.");
+                alert.setHeaderText("¿Seguro que quieres cerrar la aplicación?");
+                alert.setContentText("Se perderá todo el progreso de la partida.");
+                alert.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        stage.close();
+                    }
+                });
+            }
         });
     }
     
@@ -89,16 +85,12 @@ public class JavaFXMLApplication extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxmlapplication/fxml/MainMenu.fxml"));
         Parent root = loader.load();
         
-        //crear escna si no existe
-        if (scene==null){
+        //crea escena si no existe
+        if (scene == null){
             this.scene = new Scene(this.root);
             this.stage.setScene(scene);
             this.root.setCenter(root);
-        }
-        else{
-            this.root.setCenter(root);
-        }
-        
+        } else this.root.setCenter(root);
         
         MainMenuController controller = loader.getController();
         controller.mainApp = this;
@@ -160,8 +152,8 @@ public class JavaFXMLApplication extends Application {
         
     }
     
-    public void recuperar_contrasenya() throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxmlapplication/fxml/RecuperarContrasenya.fxml"));
+    public void recuperar_contraseña() throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/javafxmlapplication/fxml/RecuperarContraseña.fxml"));
         Parent root = loader.load();
         this.root.setCenter(root);
         
@@ -171,7 +163,6 @@ public class JavaFXMLApplication extends Application {
     
     public static void main(String[] args) {
         launch(args);
-        
     }
 
 

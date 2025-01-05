@@ -17,6 +17,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafxmlapplication.JavaFXMLApplication;
 
@@ -34,6 +36,7 @@ public class RecuperarContrasenyaController implements Initializable {
     
     @FXML
     private TextField tf_codigo;
+    
     
     @FXML
     private Label texto_codigo;
@@ -58,20 +61,29 @@ public class RecuperarContrasenyaController implements Initializable {
     @FXML
     private void boton_mandar(ActionEvent event) {
         try{
-            
             player = Connect4.getInstance().getPlayer(tf_username.getText());
             if (player == null){
                 Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
+                alert.setTitle("Error.");
                 alert.setHeaderText(null);
-                alert.setContentText("No existe una cuenta con este nombre");
+                alert.setContentText("No existe una cuenta con este nombre.");
                 alert.showAndWait();
                 return;
             }
+            
+            if (!tf_email.getText().equals(player.getEmail())){
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error.");
+                alert.setHeaderText(null);
+                alert.setContentText("Correo electrónico incorrecto.\n Asegúrate de haberlo introducido correctamente.");
+                alert.showAndWait();
+                return;
+            }
+            
             if (tf_email.getText().equals(player.getEmail())){
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Email");
-                    alert.setHeaderText("Email con codigo");
+                    alert.setTitle("Email.");
+                    alert.setHeaderText("Email con código.");
                     codigo = ThreadLocalRandom.current().nextInt(0, 1000);
                     alert.setContentText(Integer.toString(codigo));
                     alert.showAndWait();
@@ -80,16 +92,15 @@ public class RecuperarContrasenyaController implements Initializable {
                     tf_codigo.setVisible(true);
                     boton_validar.setVisible(true);
             }
-        
-        }catch (Exception e){}
+        } catch (Exception e){}
     }
 
     @FXML
     private void validar(ActionEvent event) throws Exception {
         if (Integer.toString(codigo).equals(tf_codigo.getText())){
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Contrasenya");
-            alert.setHeaderText("Codigo correcto, su contrasenya:");
+            alert.setTitle("Contraseña");
+            alert.setHeaderText("Código correcto, su contraseña:");
             alert.setContentText(player.getPassword());
             alert.showAndWait();
             mainApp.iniciar_sesion();
@@ -97,9 +108,26 @@ public class RecuperarContrasenyaController implements Initializable {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("Codigo incorrecto.");
+            alert.setContentText("Código incorrecto.");
             alert.showAndWait();
         
+        }
+    }
+
+    @FXML
+    private void email_enter(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.ENTER && 
+                !tf_username.getText().equals("") &&
+                !tf_email.getText().equals("")) {
+            boton_mandar(null);
+        }
+    }
+
+    @FXML
+    private void codigo_enter(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.ENTER && 
+                !tf_codigo.getText().equals("")) {
+            validar(null);
         }
     }
     

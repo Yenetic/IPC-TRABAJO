@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/javafxmlapplication/JavaFXMLApplication.java</file>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/javafxmlapplication/fxml/MenuJugarController.java</file>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/javafxmlapplication/fxml/IniciarSesionController.java</file>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/javafxmlapplication/fxml/MainMenuController.java</file>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/javafxmlapplication/fxml/RegistrarseController.java</file>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/javafxmlapplication/fxml/RecuperarContrasenyaController.java</file>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/estilos/oscuro.css</file>
-            <file>file:/home/maxim/Desktop/IPC/4_en_raya/src/javafxmlapplication/fxml/JuegoController.java</file>
+            <file>file:/C:/Users/DEVA/Downloads/Archive/src/javafxmlapplication/fxml/JuegoController.java</file>
+            <file>file:/C:/Users/DEVA/Downloads/Archive/src/javafxmlapplication/fxml/IniciarSesionController.java</file>
+            <file>file:/C:/Users/DEVA/Downloads/Archive/src/javafxmlapplication/fxml/MainMenuController.java</file>
+            <file>file:/C:/Users/DEVA/Downloads/Archive/src/javafxmlapplication/fxml/RegistrarseController.java</file>
+            <file>file:/C:/Users/DEVA/Downloads/Archive/src/javafxmlapplication/fxml/MenuJugarController.java</file>
+            <file>file:/C:/Users/DEVA/Downloads/Archive/src/javafxmlapplication/fxml/RecuperarContrasenyaController.java</file>
+            <file>file:/C:/Users/DEVA/Downloads/Archive/src/javafxmlapplication/fxml/BorderPane.java</file>
         </group>
     </open-files>
 </project-private>

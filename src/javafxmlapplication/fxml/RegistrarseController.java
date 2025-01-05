@@ -28,6 +28,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafxmlapplication.JavaFXMLApplication;
 import java.util.concurrent.ThreadLocalRandom;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 /**
  *
  * @author maxim
@@ -40,7 +44,6 @@ public class RegistrarseController  implements Initializable {
     private Button boton_registrarse;
     @FXML
     private TextField tf_username;
-    @FXML
     private TextField tf_password;
     @FXML
     private TextField tf_email;
@@ -53,6 +56,16 @@ public class RegistrarseController  implements Initializable {
     private boolean actualizar=false;
     private Player actualizando;
     @FXML
+    private TextField tf_password_shown;
+    @FXML
+    private PasswordField tf_password_hidden;
+    @FXML
+    private ToggleButton show_password;
+    public void initialize(URL url, ResourceBundle rb) {
+        tf_password_shown.textProperty().bindBidirectional(tf_password_hidden.textProperty());
+    }    
+    
+    @FXML
     private void boton_volver_atras(ActionEvent event) throws Exception {
         if (actualizar){mainApp.menu_jugar();}
         else{mainApp.menu_principal();}
@@ -64,7 +77,7 @@ public class RegistrarseController  implements Initializable {
         tf_username.setText(player.getNickName());
         tf_username.setEditable(false);
         tf_username.setDisable(true);
-        tf_password.setText(player.getPassword());
+        tf_password_shown.setText(player.getPassword());
         tf_email.setText(player.getEmail());
         dp_dob.setValue(player.getBirthdate());
         imagen_preview.setImage(player.getAvatar());
@@ -92,43 +105,43 @@ public class RegistrarseController  implements Initializable {
     }
     @FXML
     private void boton_registrarse(ActionEvent event) throws Exception {
-        if (tf_username.getText().equals("") || tf_email.getText().equals("") || tf_password.getText().equals("") || dp_dob.getValue()==null){
+        if (tf_username.getText().equals("") || tf_email.getText().equals("") || tf_password_shown.getText().equals("") || dp_dob.getValue()==null){
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error");
-            alert.setHeaderText("Faltan datos");
-            alert.setContentText("Tiene que introducir por lo menos un nombre de usuario, un email, una fecha de nacimiento y una contrasenya.");
+            alert.setHeaderText("Faltan datos.");
+            alert.setContentText("Tiene que introducir por lo menos un nombre de usuario,\n un email, una fecha de nacimiento\n y una contraseña.");
             alert.showAndWait();
             return;
         }
         if (!actualizar && (mainApp.player_manager.existsNickName(tf_username.getText()))){
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error");
-            alert.setHeaderText("Error en registrarse");
+            alert.setHeaderText("Error en registrarse.");
             alert.setContentText("Ya existe un usuario con este nombre.");
             alert.showAndWait();
             return;
         }
-        if (! tf_password.getText().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%&*()\\-=+])[A-Za-z\\d!@#$%&*()\\-=+]{8,20}$")){
+        if (! tf_password_shown.getText().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%&*()\\-=+])[A-Za-z\\d!@#$%&*()\\-=+]{8,20}$")){
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Contrasenya no valida");
-            alert.setContentText("Su contraseña tiene que contener entre 8 y 20 caracteres, incorporar al menos una letra en mayúsculas y minúsculas, algún dígito y algún carácter especial !@#$%&*()-+= ).");
+            alert.setTitle("Error.");
+            alert.setHeaderText("Contraseña no válida.");
+            alert.setContentText("Su contraseña debe contener entre 8 y 20 caracteres,\n incorporar al menos una letra en mayúsculas y minúsculas,\n algún dígito y algún carácter especial !@#$%&*()-+= ).");
             alert.showAndWait();
             return;
         }
         if (! tf_email.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Email no valido");
-            alert.setContentText("Email introducido no tiene formato valido.");
+            alert.setTitle("Error.");
+            alert.setHeaderText("Email no válido.");
+            alert.setContentText("Email introducido no tiene formato válido.");
             alert.showAndWait();
             return;
         }
         if ( LocalDate.now().minusYears(12).isBefore(dp_dob.getValue())){
             Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Eres demasiado joven");
-            alert.setContentText("Hay que tener al menos 12 anyos para jugar.");
+            alert.setTitle("Error.");
+            alert.setHeaderText("Eres demasiado joven.");
+            alert.setContentText("Debes tener al menos 12 años para jugar.");
             alert.showAndWait();
             return;
         }
@@ -142,35 +155,57 @@ public class RegistrarseController  implements Initializable {
             if (actualizar){
                 actualizando.setEmail(tf_email.getText());
                 actualizando.setBirthdate(dp_dob.getValue());
-                actualizando.setPassword(tf_password.getText());
+                actualizando.setPassword(tf_password_shown.getText());
                 actualizando.setAvatar(avatar);
             }
             else{
-                mainApp.player_manager.registerPlayer(tf_username.getText(), tf_email.getText(), tf_password.getText(), dp_dob.getValue(), 0, avatar);}
+                mainApp.player_manager.registerPlayer(tf_username.getText(), tf_email.getText(), tf_password_shown.getText(), dp_dob.getValue(), 0, avatar);}
             }
         else{
-            mainApp.player_manager.registerPlayer(tf_username.getText(), tf_email.getText(), tf_password.getText(), dp_dob.getValue(), 0);
+            mainApp.player_manager.registerPlayer(tf_username.getText(), tf_email.getText(), tf_password_shown.getText(), dp_dob.getValue(), 0);
         }
         
         
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Exito");
+        alert.setTitle("Éxito.");
         alert.setHeaderText("Registro completado.");
-        if (actualizar){alert.setHeaderText("Actualizacion completada.");}
-        alert.setContentText("Bienvenido, "+ tf_username.getText());
+        if (actualizar){alert.setHeaderText("Actualización completada.");}
+        alert.setContentText("Bienvenido, "+ tf_username.getText() + ".");
         alert.showAndWait();
      
         if (actualizar){mainApp.menu_jugar();}
         else{mainApp.menu_principal();}
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
-    
     private String getFileExtension(File file) {
         String name = file.getName();
         int lastDot = name.lastIndexOf('.');
         return (lastDot == -1) ? "" : name.substring(lastDot);
+    }
+
+    @FXML
+    private void boton_mostrar_contraseña(ActionEvent event) {
+        if(show_password.isSelected()) {
+            tf_password_hidden.setVisible(false);
+            tf_password_shown.setVisible(true);
+            tf_password_shown.requestFocus();
+            tf_password_shown.selectEnd();
+        } else {
+            tf_password_hidden.setVisible(true);
+            tf_password_shown.setVisible(false);
+            tf_password_hidden.requestFocus();
+            tf_password_hidden.selectEnd();
+        }
+    }
+
+    @FXML
+    private void contraseña_enter(KeyEvent event) throws Exception {
+        if (event.getCode() == KeyCode.ENTER && 
+                !tf_username.getText().equals("") &&
+                !tf_email.getText().equals("") &&
+                dp_dob.getValue() != null &&
+                !tf_password_shown.getText().equals("")) {
+            boton_registrarse(null);
+        }
     }
 }

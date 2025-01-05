@@ -46,11 +46,13 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private void boton_salir(ActionEvent event) throws Exception {
-        if (mainApp.player1 != null){mainApp.menu_jugar();}
-        else{Platform.exit();}
+        if (mainApp.player1 != null) mainApp.menu_jugar();
+        else Platform.exit();
     }
     public void inicializar_(){
-    if(mainApp.player1!=null){nodo_boton_salir.setText("Cancelar");texto_jugador.setText("Jugador 2");}
-    else{texto_jugador.setText("");}
+        if(mainApp.player1!=null){
+            nodo_boton_salir.setText("Cancelar");
+            texto_jugador.setText("Jugador 2");
+        } else texto_jugador.setText("");
     }
 }

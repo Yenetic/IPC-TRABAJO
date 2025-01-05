@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -57,8 +58,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -139,10 +142,18 @@ public class MenuJugarController implements Initializable {
     private Player selected_player;
     @FXML
     private Label player_name;
+    @FXML
+    private GridPane gridpane;
+    @FXML
+    private Button boton_actualizar_perfil1;
+    @FXML
+    private Button boton_cerrar_sesion1;
+    @FXML
+    private ColumnConstraints gridpaneColumn;
     public void initialize(URL url, ResourceBundle rb) {
-        filtro_ganadas.setOnAction(eh->{filtro.setText("Solo ganadas");});
-        filtro_perdidas.setOnAction(eh->{filtro.setText("Solo perdidas");});
-        filtro_todas.setOnAction(eh->{filtro.setText("Todas");});
+        filtro_ganadas.setOnAction(eh->{filtro.setText("Sólo ganadas.");});
+        filtro_perdidas.setOnAction(eh->{filtro.setText("Sólo perdidas.");});
+        filtro_todas.setOnAction(eh->{filtro.setText("Todas.");});
         
     }    
     
@@ -228,9 +239,8 @@ public class MenuJugarController implements Initializable {
             @Override
             protected void updateItem(Image item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setGraphic(null);
-                } else {
+                if (empty || item == null) setGraphic(null);
+                else {
                     imageView.setImage(item);
                     imageView.setFitWidth(30); 
                     imageView.setFitHeight(30); 
@@ -250,9 +260,10 @@ public class MenuJugarController implements Initializable {
                 selected_player = player;
                 player_selector.setText(player.getNickName());
             });
-
+            
             menu.add(menuItem);
         }
+        
         player_selector.getItems().setAll(menu);        
         column_dates.setCellValueFactory(round -> new SimpleStringProperty(round.getValue().getTimestamp().toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
         column_hours.setCellValueFactory(round -> {
@@ -264,19 +275,21 @@ public class MenuJugarController implements Initializable {
         column_winners.setCellValueFactory(round -> new SimpleStringProperty(round.getValue().getWinner().getNickName()));
         column_losers.setCellValueFactory(round -> new SimpleStringProperty(round.getValue().getLoser().getNickName()));
         
-        
-        
         if (mainApp.player2 != null){
-            boton_cerrar_sesion.setText("Cerrar sesion (jugador 2)");
-            boton_actualizar_perfil.setText("Actualizar perfil (jugador 2)");
+            boton_cerrar_sesion.setText("Cerrar sesión (" + mainApp.player2.getNickName() + ")");
+            boton_actualizar_perfil.setText("Actualizar perfil (" + mainApp.player2.getNickName() + ")");
+            boton_cerrar_sesion1.setText("Cerrar sesión (" + mainApp.player1.getNickName() + ")");
+            boton_actualizar_perfil1.setText("Actualizar perfil (" + mainApp.player1.getNickName() + ")");
             boton_jugar_contra_otro_jugador.setText("Jugar contra otro jugador");
             boton_jugar_contra_robot.setVisible(false);
-           
+            boton_actualizar_perfil1.setVisible(true);
+            boton_cerrar_sesion1.setVisible(true);
+            
+            gridpaneColumn.maxWidthProperty().setValue(0);
         }
+        
         String text = "Jugador 1: "+mainApp.player1.getNickName();
-        if (mainApp.player2!=null){
-            text+="\nJugador 2: "+mainApp.player2.getNickName();
-        }
+        if (mainApp.player2!=null) text+="\nJugador 2: "+mainApp.player2.getNickName();
         player_name.setText(text);
    
     }
@@ -287,12 +300,8 @@ public class MenuJugarController implements Initializable {
 
     @FXML
     private void jugar_contra_otro_jugador(ActionEvent event) throws Exception{
-        if (mainApp.player2!=null){
-            mainApp.empezar_juego(mainApp.player1, mainApp.player2);
-        }
-        else{
-            mainApp.menu_principal(); //repetir proceso para otro jugador
-        }
+        if (mainApp.player2!=null) mainApp.empezar_juego(mainApp.player1, mainApp.player2);
+        else mainApp.menu_principal(); //repetir proceso para otro jugador
     }
 
     @FXML
@@ -316,10 +325,8 @@ public class MenuJugarController implements Initializable {
         }
         rounds.sort((r1, r2) -> r2.getTimestamp().compareTo(r1.getTimestamp()));
         match_table.setItems(rounds);
-        
-       
-       
-        show_object(match_table, "Lista global de partidas");
+
+        show_object(match_table, "Lista global de partidas.");
     }
 
     private boolean fecha_correcta(LocalDate from, LocalDate to){
@@ -335,13 +342,12 @@ public class MenuJugarController implements Initializable {
     private boolean jugador_correcto(Player player){
         if (player == null){
                     Alert alert = new Alert(AlertType.INFORMATION);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Tiene que eligir a un usuario.");
+                    alert.setTitle("Error.");
+                    alert.setHeaderText("Tienes que eligir a un usuario.");
                     alert.setContentText(null);
                     alert.showAndWait();
                     return false;
-                }
-        return true;
+                } return true;
     }
     @FXML
     private void ver_partidas_de_jugador(ActionEvent event) {
@@ -547,26 +553,24 @@ public class MenuJugarController implements Initializable {
     }
     @FXML
     private void cerrar_sesion(ActionEvent event) throws Exception {
-        if (mainApp.player2 != null){
-            mainApp.player2 = null;
-            mainApp.menu_jugar();
-        }
-        else{
+        if (mainApp.player2 == null) {
             mainApp.player1 = null;
             mainApp.menu_principal();
-        }
+        } else if (((Button) event.getSource()).getId().equals("boton_cerrar_sesion1")){
+            mainApp.player1 = mainApp.player2;
+            mainApp.player2 = null;
+            mainApp.menu_jugar();
+        } else {
+            mainApp.player2 = null;
+            mainApp.menu_jugar();
+        } gridpaneColumn.setMaxWidth(USE_COMPUTED_SIZE);
     }
 
     @FXML
     private void actualizar_perfil(ActionEvent event) throws Exception {
-        if (mainApp.player2 != null){
-            mainApp.actualizar_perfil(mainApp.player2);
-        }
-        else{
+        if (((Button) event.getSource()).getId().equals("boton_actualizar_perfil1") || mainApp.player2 == null)
             mainApp.actualizar_perfil(mainApp.player1);
-        }
+        else mainApp.actualizar_perfil(mainApp.player2);
     }
-
-
- 
 }
+ 

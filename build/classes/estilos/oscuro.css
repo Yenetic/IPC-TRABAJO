@@ -3,7 +3,7 @@
     -fx-text-fill: #e0e0e0;
 }
 
-.button {
+.button, .toggle-button {
     -fx-background-color: #1e1e1e;
     -fx-text-fill: #e0e0e0;
     -fx-border-color: #444;
@@ -14,8 +14,12 @@
     -fx-background-color: #2e2e2e;
 }
 
-.label {
+.label, .table-text {
     -fx-text-fill: #e0e0e0;
+}
+
+Text {
+    -fx-fill: white;
 }
 
 .text-field, .text-area {

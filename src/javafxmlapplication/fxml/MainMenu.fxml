@@ -6,16 +6,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.fxml.MainMenuController">
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="601.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxmlapplication.fxml.MainMenuController">
    <children>
       <Text fx:id="texto_jugador" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" onAction="#boton_iniciar_sesion" text="Iniciar sesion" />
-      <Button mnemonicParsing="false" onAction="#boton_registrarse" text="Registrarse" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#boton_iniciar_sesion" text="Iniciar sesión" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#boton_registrarse" text="Registrarse" />
       <Separator maxWidth="300.0" opacity="0.0" prefHeight="45.0" prefWidth="300.0" />
-      <Button fx:id="nodo_boton_salir" mnemonicParsing="false" onAction="#boton_salir" prefHeight="0.0" prefWidth="88.0" text="Salir" />
+      <Button fx:id="nodo_boton_salir" alignment="CENTER" mnemonicParsing="false" onAction="#boton_salir" prefHeight="0.0" prefWidth="88.0" text="Salir" />
    </children>
 </VBox>
