@@ -88,9 +88,8 @@ public class RecuperarContrasenyaController implements Initializable {
                     alert.setContentText(Integer.toString(codigo));
                     alert.showAndWait();
                     
-                    texto_codigo.setVisible(true);
-                    tf_codigo.setVisible(true);
-                    boton_validar.setVisible(true);
+                    tf_codigo.setEditable(true);
+                    boton_validar.setFocusTraversable(true);
             }
         } catch (Exception e){}
     }

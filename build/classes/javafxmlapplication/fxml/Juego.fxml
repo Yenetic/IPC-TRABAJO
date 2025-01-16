@@ -21,7 +21,7 @@
                </font></Text>
             <ButtonBar prefHeight="26.0" prefWidth="272.0">
               <buttons>
-                <Button mnemonicParsing="false" onAction="#acabar_partida" prefWidth="139.0" text="Finalizar partida" />
+                <Button mnemonicParsing="false" onAction="#acabar_partida" prefWidth="139.0" style="-fx-background-color: RED;" text="Abortar partida" textFill="WHITE" />
               </buttons>
             </ButtonBar>
          </children>

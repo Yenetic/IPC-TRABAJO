@@ -132,8 +132,8 @@ public class RegistrarseController  implements Initializable {
         if (! tf_email.getText().matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")){
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Error.");
-            alert.setHeaderText("Email no válido.");
-            alert.setContentText("Email introducido no tiene formato válido.");
+            alert.setHeaderText("Correo electrónico no válido.");
+            alert.setContentText("Correo electrónico introducido no tiene formato válido.");
             alert.showAndWait();
             return;
         }

@@ -116,15 +116,15 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="28.0" prefWidth="558.0" GridPane.rowIndex="2">
          <children>
-          <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_ranking" prefHeight="40.0" prefWidth="220.0" text="Ranking" />
-            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_lista_de_partidas" prefHeight="40.0" prefWidth="220.0" text="Lista de partidas" />
+          <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_ranking" prefHeight="40.0" prefWidth="220.0" text="Ranking global" />
+            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_lista_de_partidas" prefHeight="40.0" prefWidth="220.0" text="Registro de partidas global" />
             <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_partidas_de_jugador" prefHeight="40.0" prefWidth="220.0" text="Partidas de un jugador" />
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_evolucion_de_partidas" prefHeight="40.0" prefWidth="220.0" text="Evolución de partidas" />
-            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_evolucion_de_jugador" prefHeight="40.0" prefWidth="220.0" text="Evolucion de un jugador" />
+            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_evolucion_de_partidas" prefHeight="40.0" prefWidth="220.0" text="Registro de partidas de un jugador" />
+            <Button alignment="CENTER" maxWidth="-Infinity" mnemonicParsing="false" onAction="#ver_evolucion_de_jugador" prefHeight="40.0" prefWidth="220.0" text="Evolución de un jugador" />
          </children>
       </HBox>
    </children>
